@@ -61,3 +61,5 @@ temp/
 # Prisma (optional if you use Prisma)
 prisma/dev.db
 prisma/dev.db-journal
+
+/generated/prisma
