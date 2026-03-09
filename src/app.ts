@@ -16,10 +16,10 @@ function createApp(): Application {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  app.get("/", (req: Request, res: Response) => {
-    res.status(200).json({ success: true, message: "Hello worlds!" });
+  app.get("/", async (req: Request, res: Response) => {
+    res.status(200).json({ status: "OK" });
   });
-  
+
   return app;
 }
 
