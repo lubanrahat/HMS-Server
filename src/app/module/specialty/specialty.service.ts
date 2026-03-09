@@ -1,4 +1,3 @@
-import { date } from "zod";
 import { Specialty } from "../../../../generated/prisma/client";
 import { prisma } from "../../lib/prisma";
 

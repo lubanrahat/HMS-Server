@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, RequestHandler, Response } from "express";
 import { SpecialtyService } from "./specialty.service";
 
 const createSpecialty = async (req: Request, res: Response) => {
