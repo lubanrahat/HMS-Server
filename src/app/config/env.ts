@@ -6,6 +6,9 @@ const envSchema = z.object({
   PORT: z.string().min(1, "PORT is required"),
   //Database
   DATABASE_URL: z.string().url().min(1, "DATABASE_URL is required"),
+  //Better auth
+  BETTER_AUTH_SECRET: z.string().min(1, "BETTER_AUTH_SECRET is required"),
+  BETTER_AUTH_URL: z.string().min(1, "BETTER_AUTH_URL is required"),
 });
 
 const parsedEnv = envSchema.safeParse(process.env);
@@ -26,6 +29,10 @@ const config = {
   },
   database: {
     url: env.DATABASE_URL,
+  },
+  betterAuth: {
+    secret: env.BETTER_AUTH_SECRET,
+    url: env.BETTER_AUTH_URL,
   },
 };
 
