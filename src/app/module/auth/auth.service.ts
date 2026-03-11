@@ -20,7 +20,35 @@ const registerPatient = async (payload: IRegisterPatientPayload) => {
     throw Error("Failed to register patient");
   }
 
-  return data;
+  try {
+    const patient = await prisma.$transaction(async (tx) => {
+      const result = await tx.patient.create({
+        data: {
+          userId: data.user.id,
+          name: payload.name,
+          email: payload.email,
+        },
+      });
+
+      return result;
+    });
+
+    return {
+      ...data,
+      patient,
+    };
+  } catch (error) {
+    console.error(
+      "Transaction error: ",
+      error instanceof Error ? error.message : "Internal server error!",
+    );
+    await prisma.user.delete({
+      where: {
+        id: data.user.id,
+      },
+    });
+    throw error;
+  }
 };
 
 const loginUser = async (payload: ILoginPatientPayload) => {

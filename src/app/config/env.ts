@@ -4,6 +4,7 @@ import "dotenv/config";
 const envSchema = z.object({
   //App
   PORT: z.string().min(1, "PORT is required"),
+  NODE_ENV: z.string().min(1, "NODE_ENV is required"),
   //Database
   DATABASE_URL: z.string().url().min(1, "DATABASE_URL is required"),
   //Better auth
@@ -26,6 +27,7 @@ const env = parsedEnv.data;
 const config = {
   app: {
     port: env.PORT,
+    nodeEnv: env.NODE_ENV,
   },
   database: {
     url: env.DATABASE_URL,
