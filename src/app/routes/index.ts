@@ -1,6 +1,6 @@
 import express from "express";
-import { SpecialtyRoutes } from "../module/specialty/specialty.route";
-import { authRoutes } from "../module/auth/auth.route";
+import { SpecialtyRoutes } from "../module/specialty/specialty.routes";
+import { authRoutes } from "../module/auth/auth.routes";
 
 const router = express.Router();
 
