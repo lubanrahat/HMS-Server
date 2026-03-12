@@ -5,6 +5,8 @@ const envSchema = z.object({
   //App
   PORT: z.string().min(1, "PORT is required"),
   NODE_ENV: z.string().min(1, "NODE_ENV is required"),
+  //frontend
+  FRONTEND_URL: z.string().url().min(1, "FRONTEND_URL is required"),
   //Database
   DATABASE_URL: z.string().url().min(1, "DATABASE_URL is required"),
   //Better auth
@@ -35,6 +37,9 @@ const config = {
   betterAuth: {
     secret: env.BETTER_AUTH_SECRET,
     url: env.BETTER_AUTH_URL,
+  },
+  frontend: {
+    url: env.FRONTEND_URL,
   },
 };
 

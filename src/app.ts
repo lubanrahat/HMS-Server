@@ -2,13 +2,15 @@ import express, { Application, NextFunction, Request, Response } from "express";
 import cors from "cors";
 import { IndexRoutes } from "./app/routes";
 import { globalErrorHandler } from "./app/middleware/globalErrorHandler";
+import config from "./app/config/env";
+import { notFound } from "./app/middleware/notFound";
 
 function createApp(): Application {
   const app: Application = express();
 
   app.use(
     cors({
-      origin: "*",
+      origin: config.frontend.url,
       credentials: true,
       methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
       allowedHeaders: ["Content-Type", "Authorization"],
@@ -25,7 +27,9 @@ function createApp(): Application {
   app.use("/api/v1", IndexRoutes);
 
   //Global Error Handler
-  app.use(globalErrorHandler)
+  app.use(globalErrorHandler);
+  //Not found route
+  app.use(notFound);
 
   return app;
 }
