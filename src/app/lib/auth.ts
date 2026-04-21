@@ -25,7 +25,7 @@ export const auth = betterAuth({
         defaultValue: UserStatus.ACTIVE,
       },
       needPasswordChange: {
-        type: "string",
+        type: "boolean",
         required: true,
         defaultValue: false,
       },
