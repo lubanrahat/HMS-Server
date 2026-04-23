@@ -58,6 +58,55 @@ const createDoctor = async (payload: ICreateDoctorPayload) => {
       await tx.doctorSpecialty.createMany({
         data: doctorSpecialtyData,
       });
+
+      const doctor = await tx.doctor.findUnique({
+        where: {
+          id: doctorData.id,
+        },
+        select: {
+          id: true,
+          userId: true,
+          name: true,
+          email: true,
+          profilePhoto: true,
+          contactNumber: true,
+          address: true,
+          registrationNumber: true,
+          experience: true,
+          gender: true,
+          appointmentFee: true,
+          qualification: true,
+          currentWorkingPlace: true,
+          designation: true,
+          user: {
+            select: {
+              id: true,
+              email: true,
+              name: true,
+              role: true,
+              status: true,
+              emailVerified: true,
+              image: true,
+              isDeleted: true,
+              createdAt: true,
+              updatedAt: true,
+            },
+          },
+          specialties: {
+            select: {
+              specialty: {
+                select: {
+                  title: true,
+                  id: true,
+                },
+              },
+            },
+          },
+        },
+      });
+
+      return doctor;
+
     });
 
     return result;
@@ -71,3 +120,7 @@ const createDoctor = async (payload: ICreateDoctorPayload) => {
     throw error;
   }
 };
+
+export const UserService = {
+  createDoctor
+}
