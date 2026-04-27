@@ -1,3 +1,4 @@
+import { logger } from "better-auth/*";
 import { Specialty, UserRole } from "../../../generated/prisma/client";
 import { auth } from "../../lib/auth";
 import { prisma } from "../../lib/prisma";
@@ -25,7 +26,7 @@ const createDoctor = async (payload: ICreateDoctorPayload) => {
     },
   });
 
-  if (!userExists) {
+  if (userExists) {
     throw Error(`User with this email already exists`);
   }
 
