@@ -8,5 +8,6 @@ export interface TErrorResponse {
   message: string;
   errorSources: TErrorSource[];
   error?: unknown;
+  stack?:string
   statusCode: number;
 }

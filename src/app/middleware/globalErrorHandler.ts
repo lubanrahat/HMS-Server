@@ -4,6 +4,7 @@ import status from "http-status";
 import z from "zod";
 import { TErrorResponse, TErrorSource } from "../interfaces/error.interface";
 import { handleZodError } from "../errorHelpers/handleZodError";
+import AppError from "../errorHelpers/AppError";
 
 
 export const globalErrorHandler = async (
@@ -20,6 +21,7 @@ export const globalErrorHandler = async (
   let errorSource: TErrorSource[] = [];
   let statusCode: number = status.INTERNAL_SERVER_ERROR;
   let message = "Internal server error!";
+  let stack : string | undefined = undefined
 
   if (err instanceof z.ZodError) {
     const simplifiedError = handleZodError(err);
@@ -27,13 +29,30 @@ export const globalErrorHandler = async (
     message = simplifiedError?.message;
     
     errorSource = [...simplifiedError.errorSources]
-  }
+  } else if(err instanceof AppError) {
+    statusCode = err.statusCode
+    message = err.message
+    stack = err.stack
+    errorSource = [{
+      path: "",
+      message: err.message
+    }]
+  }else if(err instanceof Error) {
+    statusCode = status.INTERNAL_SERVER_ERROR
+    message = err.message
+    stack = err.stack
+    errorSource = [{
+      path: "",
+      message: err.message
+    }]
+  } 
 
   const errorResponse: TErrorResponse = {
     success: false,
     message: message,
     errorSources: errorSource,
     statusCode,
+    stack: config.app.nodeEnv === "development" ? stack : undefined,
     error:
       config.app.nodeEnv === "development" &&
       (err instanceof Error ? err.message : message),
