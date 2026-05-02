@@ -30,7 +30,7 @@ const decodeToken = (token: string) => {
   return decoded;
 };
 
-const jwtUtils = {
+export const jwtUtils = {
   createToken,
   verifyToken,
   decodeToken,
