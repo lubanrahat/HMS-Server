@@ -12,11 +12,21 @@ const envSchema = z.object({
   //Better auth
   BETTER_AUTH_SECRET: z.string().min(1, "BETTER_AUTH_SECRET is required"),
   BETTER_AUTH_URL: z.string().min(1, "BETTER_AUTH_URL is required"),
+  BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN: z
+    .string()
+    .min(1, "BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN is required"),
+  BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE: z
+    .string()
+    .min(1, "BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE is required"),
   //JWT
   ACCESS_TOKEN_SECRET: z.string().min(1, "ACCESS_TOKEN_SECRET is required"),
   REFRESH_TOKEN_SECRET: z.string().min(1, "REFRESH_TOKEN_SECRET is required"),
-  ACCESS_TOKEN_EXPIRES_IN: z.string().min(1, "ACCESS_TOKEN_EXPIRES_IN is required"),
-  REFRESH_TOKEN_EXPIRES_IN: z.string().min(1, "REFRESH_TOKEN_EXPIRES_IN is required"),
+  ACCESS_TOKEN_EXPIRES_IN: z
+    .string()
+    .min(1, "ACCESS_TOKEN_EXPIRES_IN is required"),
+  REFRESH_TOKEN_EXPIRES_IN: z
+    .string()
+    .min(1, "REFRESH_TOKEN_EXPIRES_IN is required"),
 });
 
 const parsedEnv = envSchema.safeParse(process.env);
@@ -42,6 +52,8 @@ const config = {
   betterAuth: {
     secret: env.BETTER_AUTH_SECRET,
     url: env.BETTER_AUTH_URL,
+    sessionTokenExpiresIn: env.BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN,
+    sessionTokenUpdateAge: env.BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE,
   },
   frontend: {
     url: env.FRONTEND_URL,

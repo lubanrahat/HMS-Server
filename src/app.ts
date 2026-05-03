@@ -4,6 +4,7 @@ import { IndexRoutes } from "./app/routes";
 import { globalErrorHandler } from "./app/middleware/globalErrorHandler";
 import config from "./app/config/env";
 import { notFound } from "./app/middleware/notFound";
+import cookieParser from "cookie-parser";
 
 function createApp(): Application {
   const app: Application = express();
@@ -18,6 +19,7 @@ function createApp(): Application {
   );
 
   app.use(express.json());
+  app.use(cookieParser());
   app.use(express.urlencoded({ extended: true }));
 
   app.get("/", async (req: Request, res: Response) => {

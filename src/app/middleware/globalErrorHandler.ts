@@ -11,7 +11,7 @@ export const globalErrorHandler = async (
   err: unknown,
   req: Request,
   res: Response,
-  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction,
 ) => {
   if (config.app.nodeEnv === "development") {
@@ -54,8 +54,9 @@ export const globalErrorHandler = async (
     statusCode,
     stack: config.app.nodeEnv === "development" ? stack : undefined,
     error:
-      config.app.nodeEnv === "development" &&
-      (err instanceof Error ? err.message : message),
+      err instanceof Error
+        ? { ...err, name: err.name, message: err.message, stack: err.stack }
+        : err,
   }
 
   res.status(statusCode).json(errorResponse);
