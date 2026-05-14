@@ -1,10 +1,44 @@
-import { email, z } from "zod";
+import { z } from "zod";
+
+const passwordSchema = z
+  .string()
+  .min(6, "Password must be at least 6 characters long")
+  .max(20, "Password must be at most 20 characters long");
+
+const profileSchema = z.object({
+  name: z
+    .string()
+    .min(1, "Name is required")
+    .min(3, "Name must be at least 3 characters long")
+    .max(50, "Name must be at most 50 characters long"),
+  email: z.email("Invalid email address").max(
+    50,
+    "Email must be at most 50 characters long",
+  ),
+  profilePhoto: z.url("Invalid profile photo URL").optional(),
+  contactNumber: z
+    .string()
+    .min(10, "Contact number must be at least 10 digits long")
+    .max(15, "Contact number must be at most 15 characters long")
+    .optional(),
+  address: z
+    .string()
+    .max(100, "Address must be at most 100 characters long")
+    .optional(),
+});
+
+export const adminCreateSchema = z.object({
+  password: passwordSchema,
+  admin: profileSchema,
+});
+
+export const superAdminCreateSchema = z.object({
+  password: passwordSchema,
+  superAdmin: profileSchema,
+});
 
 export const doctorCreateSchema = z.object({
-  password: z
-    .string()
-    .min(6, "Password must be at least 6 characters long")
-    .max(20, "Password must be at most 20 characters long"),
+  password: passwordSchema,
 
   doctor: z.object({
     name: z
@@ -12,11 +46,11 @@ export const doctorCreateSchema = z.object({
       .min(1, "Name is required")
       .min(3, "Name must be at least 3 characters long")
       .max(30, "Name must be at most 50 characters long"),
-    email: email("Invalid email address").max(
+    email: z.email("Invalid email address").max(
       50,
       "Email must be at most 50 characters long",
     ),
-    profilePhoto: z.string().optional(),
+    profilePhoto: z.url("Invalid profile photo URL").optional(),
     contactNumber: z
       .string()
       .min(10, "Contact number must be at least 10 digits long")

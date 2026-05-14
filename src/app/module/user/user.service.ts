@@ -1,8 +1,114 @@
-import { logger } from "better-auth/*";
+import status from "http-status";
 import { Specialty, UserRole } from "../../../generated/prisma/client";
+import AppError from "../../errorHelpers/AppError";
 import { auth } from "../../lib/auth";
 import { prisma } from "../../lib/prisma";
-import { ICreateDoctorPayload } from "./user.interface";
+import {
+  ICreateAdminPayload,
+  ICreateDoctorPayload,
+  ICreateSuperAdminPayload,
+} from "./user.interface";
+
+const userSelect = {
+  id: true,
+  email: true,
+  name: true,
+  role: true,
+  status: true,
+  emailVerified: true,
+  image: true,
+  isDeleted: true,
+  createdAt: true,
+  updatedAt: true,
+};
+
+const assertUserDoesNotExist = async (email: string) => {
+  const userExists = await prisma.user.findUnique({
+    where: { email },
+  });
+
+  if (userExists) {
+    throw new AppError(status.CONFLICT, "User with this email already exists");
+  }
+};
+
+const cleanupUser = async (userId: string) => {
+  await prisma.user.delete({
+    where: {
+      id: userId,
+    },
+  });
+};
+
+const createAdmin = async (payload: ICreateAdminPayload) => {
+  await assertUserDoesNotExist(payload.admin.email);
+
+  const userData = await auth.api.signUpEmail({
+    body: {
+      email: payload.admin.email,
+      password: payload.password,
+      role: UserRole.ADMIN,
+      name: payload.admin.name,
+      needPasswordChange: true,
+    },
+  });
+
+  try {
+    return await prisma.$transaction(async (tx) => {
+      const admin = await tx.admin.create({
+        data: {
+          userId: userData.user.id,
+          ...payload.admin,
+        },
+        include: {
+          user: {
+            select: userSelect,
+          },
+        },
+      });
+
+      return admin;
+    });
+  } catch (error) {
+    await cleanupUser(userData.user.id);
+    throw error;
+  }
+};
+
+const createSuperAdmin = async (payload: ICreateSuperAdminPayload) => {
+  await assertUserDoesNotExist(payload.superAdmin.email);
+
+  const userData = await auth.api.signUpEmail({
+    body: {
+      email: payload.superAdmin.email,
+      password: payload.password,
+      role: UserRole.SUPER_ADMIN,
+      name: payload.superAdmin.name,
+      needPasswordChange: true,
+    },
+  });
+
+  try {
+    return await prisma.$transaction(async (tx) => {
+      const superAdmin = await tx.superAdmin.create({
+        data: {
+          userId: userData.user.id,
+          ...payload.superAdmin,
+        },
+        include: {
+          user: {
+            select: userSelect,
+          },
+        },
+      });
+
+      return superAdmin;
+    });
+  } catch (error) {
+    await cleanupUser(userData.user.id);
+    throw error;
+  }
+};
 
 const createDoctor = async (payload: ICreateDoctorPayload) => {
   const specialties: Specialty[] = [];
@@ -20,15 +126,7 @@ const createDoctor = async (payload: ICreateDoctorPayload) => {
     specialties.push(specialty);
   }
 
-  const userExists = await prisma.user.findUnique({
-    where: {
-      email: payload.doctor.email,
-    },
-  });
-
-  if (userExists) {
-    throw Error(`User with this email already exists`);
-  }
+  await assertUserDoesNotExist(payload.doctor.email);
 
   const userData = await auth.api.signUpEmail({
     body: {
@@ -80,18 +178,7 @@ const createDoctor = async (payload: ICreateDoctorPayload) => {
           currentWorkingPlace: true,
           designation: true,
           user: {
-            select: {
-              id: true,
-              email: true,
-              name: true,
-              role: true,
-              status: true,
-              emailVerified: true,
-              image: true,
-              isDeleted: true,
-              createdAt: true,
-              updatedAt: true,
-            },
+            select: userSelect,
           },
           specialties: {
             select: {
@@ -112,16 +199,13 @@ const createDoctor = async (payload: ICreateDoctorPayload) => {
 
     return result;
   } catch (error) {
-    console.log("Transaction error : ", error);
-    await prisma.user.delete({
-      where: {
-        id: userData.user.id,
-      },
-    });
+    await cleanupUser(userData.user.id);
     throw error;
   }
 };
 
 export const UserService = {
-  createDoctor
+  createAdmin,
+  createDoctor,
+  createSuperAdmin,
 }

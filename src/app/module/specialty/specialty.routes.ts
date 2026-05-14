@@ -5,8 +5,16 @@ import { UserRole } from "../../../generated/prisma/enums";
 
 const router: Router = express.Router();
 
-router.post("/",checkAuth(UserRole.ADMIN,UserRole.SUPER_ADMIN), SpecialtyController.createSpecialty);
+router.post(
+  "/",
+  checkAuth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
+  SpecialtyController.createSpecialty,
+);
 router.get("/", SpecialtyController.getAllSpecialty);
-router.delete("/:id", SpecialtyController.deleteSpecialty);
+router.delete(
+  "/:id",
+  checkAuth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
+  SpecialtyController.deleteSpecialty,
+);
 
 export const SpecialtyRoutes = router;

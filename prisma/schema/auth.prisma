@@ -11,10 +11,12 @@ model User {
   image              String?
   createdAt          DateTime   @default(now())
   updatedAt          DateTime   @updatedAt
-  sessions           Session[]
-  accounts           Account[]
-  patient            Patient?
-  doctor             Doctor?
+
+  sessions Session[]
+  accounts Account[]
+  admin    Admin?
+  patient  Patient?
+  doctor   Doctor?
 
   @@unique([email])
   @@map("user")
