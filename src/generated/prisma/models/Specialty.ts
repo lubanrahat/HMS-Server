@@ -32,7 +32,7 @@ export type SpecialtyMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   isDeleted: boolean | null
-  deletedAt: Date | null
+  deletedAT: Date | null
 }
 
 export type SpecialtyMaxAggregateOutputType = {
@@ -43,7 +43,7 @@ export type SpecialtyMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   isDeleted: boolean | null
-  deletedAt: Date | null
+  deletedAT: Date | null
 }
 
 export type SpecialtyCountAggregateOutputType = {
@@ -54,7 +54,7 @@ export type SpecialtyCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   isDeleted: number
-  deletedAt: number
+  deletedAT: number
   _all: number
 }
 
@@ -67,7 +67,7 @@ export type SpecialtyMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   isDeleted?: true
-  deletedAt?: true
+  deletedAT?: true
 }
 
 export type SpecialtyMaxAggregateInputType = {
@@ -78,7 +78,7 @@ export type SpecialtyMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   isDeleted?: true
-  deletedAt?: true
+  deletedAT?: true
 }
 
 export type SpecialtyCountAggregateInputType = {
@@ -89,7 +89,7 @@ export type SpecialtyCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   isDeleted?: true
-  deletedAt?: true
+  deletedAT?: true
   _all?: true
 }
 
@@ -173,7 +173,7 @@ export type SpecialtyGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   isDeleted: boolean
-  deletedAt: Date | null
+  deletedAT: Date | null
   _count: SpecialtyCountAggregateOutputType | null
   _min: SpecialtyMinAggregateOutputType | null
   _max: SpecialtyMaxAggregateOutputType | null
@@ -205,7 +205,7 @@ export type SpecialtyWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Specialty"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Specialty"> | Date | string
   isDeleted?: Prisma.BoolFilter<"Specialty"> | boolean
-  deletedAt?: Prisma.DateTimeNullableFilter<"Specialty"> | Date | string | null
+  deletedAT?: Prisma.DateTimeNullableFilter<"Specialty"> | Date | string | null
   doctorSpecialties?: Prisma.DoctorSpecialtyListRelationFilter
 }
 
@@ -217,7 +217,7 @@ export type SpecialtyOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAT?: Prisma.SortOrderInput | Prisma.SortOrder
   doctorSpecialties?: Prisma.DoctorSpecialtyOrderByRelationAggregateInput
 }
 
@@ -232,7 +232,7 @@ export type SpecialtyWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Specialty"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Specialty"> | Date | string
   isDeleted?: Prisma.BoolFilter<"Specialty"> | boolean
-  deletedAt?: Prisma.DateTimeNullableFilter<"Specialty"> | Date | string | null
+  deletedAT?: Prisma.DateTimeNullableFilter<"Specialty"> | Date | string | null
   doctorSpecialties?: Prisma.DoctorSpecialtyListRelationFilter
 }, "id" | "title">
 
@@ -244,7 +244,7 @@ export type SpecialtyOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAT?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SpecialtyCountOrderByAggregateInput
   _max?: Prisma.SpecialtyMaxOrderByAggregateInput
   _min?: Prisma.SpecialtyMinOrderByAggregateInput
@@ -261,7 +261,7 @@ export type SpecialtyScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Specialty"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Specialty"> | Date | string
   isDeleted?: Prisma.BoolWithAggregatesFilter<"Specialty"> | boolean
-  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Specialty"> | Date | string | null
+  deletedAT?: Prisma.DateTimeNullableWithAggregatesFilter<"Specialty"> | Date | string | null
 }
 
 export type SpecialtyCreateInput = {
@@ -272,7 +272,7 @@ export type SpecialtyCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isDeleted?: boolean
-  deletedAt?: Date | string | null
+  deletedAT?: Date | string | null
   doctorSpecialties?: Prisma.DoctorSpecialtyCreateNestedManyWithoutSpecialtyInput
 }
 
@@ -284,7 +284,7 @@ export type SpecialtyUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isDeleted?: boolean
-  deletedAt?: Date | string | null
+  deletedAT?: Date | string | null
   doctorSpecialties?: Prisma.DoctorSpecialtyUncheckedCreateNestedManyWithoutSpecialtyInput
 }
 
@@ -296,7 +296,7 @@ export type SpecialtyUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAT?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   doctorSpecialties?: Prisma.DoctorSpecialtyUpdateManyWithoutSpecialtyNestedInput
 }
 
@@ -308,7 +308,7 @@ export type SpecialtyUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAT?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   doctorSpecialties?: Prisma.DoctorSpecialtyUncheckedUpdateManyWithoutSpecialtyNestedInput
 }
 
@@ -320,7 +320,7 @@ export type SpecialtyCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isDeleted?: boolean
-  deletedAt?: Date | string | null
+  deletedAT?: Date | string | null
 }
 
 export type SpecialtyUpdateManyMutationInput = {
@@ -331,7 +331,7 @@ export type SpecialtyUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAT?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SpecialtyUncheckedUpdateManyInput = {
@@ -342,7 +342,7 @@ export type SpecialtyUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAT?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SpecialtyCountOrderByAggregateInput = {
@@ -353,7 +353,7 @@ export type SpecialtyCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
+  deletedAT?: Prisma.SortOrder
 }
 
 export type SpecialtyMaxOrderByAggregateInput = {
@@ -364,7 +364,7 @@ export type SpecialtyMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
+  deletedAT?: Prisma.SortOrder
 }
 
 export type SpecialtyMinOrderByAggregateInput = {
@@ -375,7 +375,7 @@ export type SpecialtyMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
+  deletedAT?: Prisma.SortOrder
 }
 
 export type SpecialtyScalarRelationFilter = {
@@ -405,7 +405,7 @@ export type SpecialtyCreateWithoutDoctorSpecialtiesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isDeleted?: boolean
-  deletedAt?: Date | string | null
+  deletedAT?: Date | string | null
 }
 
 export type SpecialtyUncheckedCreateWithoutDoctorSpecialtiesInput = {
@@ -416,7 +416,7 @@ export type SpecialtyUncheckedCreateWithoutDoctorSpecialtiesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isDeleted?: boolean
-  deletedAt?: Date | string | null
+  deletedAT?: Date | string | null
 }
 
 export type SpecialtyCreateOrConnectWithoutDoctorSpecialtiesInput = {
@@ -443,7 +443,7 @@ export type SpecialtyUpdateWithoutDoctorSpecialtiesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAT?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SpecialtyUncheckedUpdateWithoutDoctorSpecialtiesInput = {
@@ -454,7 +454,7 @@ export type SpecialtyUncheckedUpdateWithoutDoctorSpecialtiesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAT?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -496,7 +496,7 @@ export type SpecialtySelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   createdAt?: boolean
   updatedAt?: boolean
   isDeleted?: boolean
-  deletedAt?: boolean
+  deletedAT?: boolean
   doctorSpecialties?: boolean | Prisma.Specialty$doctorSpecialtiesArgs<ExtArgs>
   _count?: boolean | Prisma.SpecialtyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["specialty"]>
@@ -509,7 +509,7 @@ export type SpecialtySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   createdAt?: boolean
   updatedAt?: boolean
   isDeleted?: boolean
-  deletedAt?: boolean
+  deletedAT?: boolean
 }, ExtArgs["result"]["specialty"]>
 
 export type SpecialtySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -520,7 +520,7 @@ export type SpecialtySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   createdAt?: boolean
   updatedAt?: boolean
   isDeleted?: boolean
-  deletedAt?: boolean
+  deletedAT?: boolean
 }, ExtArgs["result"]["specialty"]>
 
 export type SpecialtySelectScalar = {
@@ -531,10 +531,10 @@ export type SpecialtySelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   isDeleted?: boolean
-  deletedAt?: boolean
+  deletedAT?: boolean
 }
 
-export type SpecialtyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "icon" | "createdAt" | "updatedAt" | "isDeleted" | "deletedAt", ExtArgs["result"]["specialty"]>
+export type SpecialtyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "icon" | "createdAt" | "updatedAt" | "isDeleted" | "deletedAT", ExtArgs["result"]["specialty"]>
 export type SpecialtyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   doctorSpecialties?: boolean | Prisma.Specialty$doctorSpecialtiesArgs<ExtArgs>
   _count?: boolean | Prisma.SpecialtyCountOutputTypeDefaultArgs<ExtArgs>
@@ -555,7 +555,7 @@ export type $SpecialtyPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     createdAt: Date
     updatedAt: Date
     isDeleted: boolean
-    deletedAt: Date | null
+    deletedAT: Date | null
   }, ExtArgs["result"]["specialty"]>
   composites: {}
 }
@@ -987,7 +987,7 @@ export interface SpecialtyFieldRefs {
   readonly createdAt: Prisma.FieldRef<"Specialty", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Specialty", 'DateTime'>
   readonly isDeleted: Prisma.FieldRef<"Specialty", 'Boolean'>
-  readonly deletedAt: Prisma.FieldRef<"Specialty", 'DateTime'>
+  readonly deletedAT: Prisma.FieldRef<"Specialty", 'DateTime'>
 }
     
 

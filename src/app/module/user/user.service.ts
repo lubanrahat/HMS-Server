@@ -90,7 +90,7 @@ const createSuperAdmin = async (payload: ICreateSuperAdminPayload) => {
 
   try {
     return await prisma.$transaction(async (tx) => {
-      const superAdmin = await tx.superAdmin.create({
+      const superAdmin = await tx.admin.create({
         data: {
           userId: userData.user.id,
           ...payload.superAdmin,
